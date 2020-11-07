@@ -19,19 +19,17 @@ type Proceso struct {
 
 func (p *Proceso) start() {
 	for {
-		if p.Status == true {
-			p.Tiempo++
+		p.Tiempo++
+		if p.Status {
 			p.print()
 		}
 	}
 }
 
 func (p *Proceso) print() {
-	for {
-		fmt.Printf("id %d: %d", p.Id, p.Tiempo)
-		fmt.Println()
-		time.Sleep(time.Millisecond * 500)
-	}
+	fmt.Printf("id %d: %d", p.Id, p.Tiempo)
+	fmt.Println()
+	time.Sleep(time.Millisecond * 800)
 }
 
 func servidor() {
@@ -64,7 +62,7 @@ func handleClient(c net.Conn) { //cuando el cliente arranque
 	if err != nil {
 		fmt.Println(err)
 		return
-	} 
+	}
 	pro.Status = true
 	lista.PushBack(&pro)
 	go pro.start()
@@ -75,7 +73,7 @@ func handleClient(c net.Conn) { //cuando el cliente arranque
 func crearProcesos() {
 	var i uint64
 	for i = 0; i < 5; i++ {
-		p := Proceso{Id: i+1, Status: true, Tiempo: 0}
+		p := Proceso{Id: i + 1, Status: true, Tiempo: 0}
 		lista.PushBack(&p)
 		go p.start()
 	}

@@ -24,11 +24,9 @@ func (p *Proceso) start() {
 }
 
 func (p *Proceso) print() {
-	for {
-		fmt.Printf("id %d: %d", p.Id, p.Tiempo)
-		fmt.Println()
-		time.Sleep(time.Millisecond * 500)
-	}
+	fmt.Printf("id %d: %d", p.Id, p.Tiempo)
+	fmt.Println()
+	time.Sleep(time.Millisecond * 800)
 }
 
 func cliente() {
